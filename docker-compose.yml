@@ -1,0 +1,20 @@
+# FalkorDB (graph database) + browser UI.
+#   docker compose up -d
+#   -> FalkorDB (Redis protocol) on localhost:6379
+#   -> FalkorDB Browser on        http://localhost:3000   (explore the graph visually)
+services:
+  falkordb:
+    image: falkordb/falkordb:latest
+    container_name: keepthem-falkordb
+    ports:
+      - "6379:6379"   # Redis/FalkorDB protocol (used by the Python client)
+      - "3000:3000"   # FalkorDB Browser
+    volumes:
+      - falkordb_data:/var/lib/falkordb/data
+    environment:
+      # Persist the graph to disk so it survives container restarts.
+      - FALKORDB_ARGS=--save 60 1
+    restart: unless-stopped
+
+volumes:
+  falkordb_data:

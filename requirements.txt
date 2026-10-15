@@ -1,0 +1,5 @@
+falkordb>=1.0.0        # FalkorDB Python client (Cypher over the Redis protocol)
+anthropic>=0.40        # Claude tool-calling agent (optional: an offline agent also ships)
+streamlit>=1.50        # demo UI
+mcp>=1.0               # expose the tools over MCP (optional)
+pytest>=8              # tests

@@ -1,0 +1,3 @@
+# OPTIONAL: lets everything run WITHOUT Docker.
+# falkordblite bundles the real FalkorDB engine as an embedded, in-process server.
+falkordblite>=0.10
