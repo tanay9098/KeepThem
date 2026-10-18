@@ -90,7 +90,7 @@ More, with real captured output: [`examples/example_queries.md`](examples/exampl
 
 Event types: `promotion, project_change, project_cancelled, complaint, manager_change, reorg, overtime_spike,
 kudos, peer_left, resignation, …` · Decision types: `promotion_denied, raise_denied, transfer_denied,
-project_removal, headcount_denied, promotion_granted, retention_*` (agent-recorded actions).
+project_removal, headcount_denied, promotion_granted, raise_approved, retention_*` (agent-recorded actions).
 Departed employees stay in the graph with `status:'left'` — **who left, and how they connect to who is still here, is the signal.**
 Data lives in [`keepthem/data.py`](keepthem/data.py); everything is synthetic.
 
@@ -146,17 +146,22 @@ score = low_review(+16) + overloaded_manager(+16) + peer_attrition(+13) + shared
 docker-compose.yml        FalkorDB + Browser
 app.py                    Streamlit demo (chat · reasoning trace · evidence graph · log-action buttons)
 keepthem/
+  config.py               env settings, pinned "today" (KEEPTHEM_AS_OF), risk thresholds
   data.py  seed.py        synthetic company → FalkorDB (Cypher MERGE/CREATE, indexes)
   db.py                   FalkorDB wrapper: RO_QUERY for reads, Node/Edge/Path → JSON
   risk.py                 signal queries + scoring + team roll-up
   actions.py              signals → concrete recommendations
   algorithms.py           graph algorithms (native algo.* and Cypher)
+  evidence.py             paths → readable strings + {nodes, edges} evidence
   tools.py                the 8 tools + JSON schemas + dispatcher
   agent.py                ClaudeAgent (manual tool-use loop) · OfflineAgent (deterministic)
   mcp_server.py           the same tools over MCP
   cli.py  report.py       CLI + markdown rendering
 examples/                 generated example queries / expected outputs
 tests/                    36 tests against a real FalkorDB
+ARCHITECTURE.md           tech stack, folder structure, graph schema, API/tool flow
+MEMORY.md                 project context + change log for the next developer / AI tool
+RULES.md                  engineering rules: no unnecessary deps, don't break APIs, test every change
 ```
 
 ## MCP (optional)

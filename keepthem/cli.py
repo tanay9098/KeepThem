@@ -4,7 +4,7 @@
     python -m keepthem.cli ask "Investigate attrition risk on the Platform team"
     python -m keepthem.cli chat                       # interactive (Claude if ANTHROPIC_API_KEY, else offline)
     python -m keepthem.cli tool investigate_risk '{"employee_id": "Dana Ruiz"}'
-    python -m keepthem.cli demo                       # the scripted 7-step demo flow
+    python -m keepthem.cli demo                       # the scripted 5-step demo flow
     python -m keepthem.cli cypher "MATCH (e:Employee) RETURN count(e) AS n"
 Add --offline to force the deterministic agent, --cypher to print the Cypher behind each tool call.
 """
